@@ -133,7 +133,7 @@ namespace ShopWinForm
 
             if (!String.IsNullOrEmpty(txtId.Text))
             {
-                customer.id = Convert.ToInt32(txtId);
+                customer.id = Convert.ToInt32(txtId.Text);
             }
 
             return customer;
@@ -167,11 +167,12 @@ namespace ShopWinForm
             {
                 case DisplayMode.Reading:
 
+                    activeControlsForReading();
                     break;
 
                 case DisplayMode.Editing:
 
-                    clearAll();
+                    
 
                     activeControlsForEditing();
 
@@ -180,6 +181,9 @@ namespace ShopWinForm
                     break;
 
                 case DisplayMode.Adding:
+                    clearAll();
+                    activeControlsForEditing();
+
                     break;
             }
         }
@@ -212,6 +216,23 @@ namespace ShopWinForm
             btnEdit.Enabled = false;
 
             dgvList.Enabled = false;
+        }
+        private void activeControlsForReading()
+        {
+
+            txtId.Enabled = false;
+            txtName.Enabled = false;
+            dtRegisteredAt.Enabled = false;
+
+            btnAddNew.Enabled = true;
+            btnDelete.Enabled = true;
+            btnEdit.Enabled = true;
+            btnSave.Enabled = true;
+            btnCancel.Enabled = true;
+
+            dgvList.Enabled = true;
+
+
         }
 
         public void setSelectedRow(DataGridViewRow selectedRow)
